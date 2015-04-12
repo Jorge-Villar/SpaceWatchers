@@ -1,0 +1,57 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    >
+
+    <TextView
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_weight="0.10"
+        android:text="IMAGEN"
+        android:gravity="center"
+        android:textColor="#008000"
+        android:textSize="30sp"
+
+
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="345dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.93"
+        android:src="@drawable/ic_launcher" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.10">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="167dp"
+                android:id="@+id/imgGood"
+                android:src="@drawable/ic_1"
+                android:background="@drawable/ic_1"
+                android:layout_weight="0.19" />
+            />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="167dp"
+                android:id="@+id/imgBad"
+                android:layout_weight="0.19"
+                android:src="@drawable/ic_3"
+                android:background="@drawable/ic_3" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
