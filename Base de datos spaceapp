@@ -1,0 +1,133 @@
+CREATE DATABASE  `spaceapp` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+-- phpMyAdmin SQL Dump
+-- version 3.1.3.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 12-04-2015 a las 08:47:53
+-- Versión del servidor: 5.1.33
+-- Versión de PHP: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Base de datos: `spaceapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clasificacion`
+--
+
+CREATE TABLE IF NOT EXISTS `clasificacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idimage` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idimage`,`iduser`,`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `clasificacion`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `foto`
+--
+
+CREATE TABLE IF NOT EXISTS `foto` (
+  `idfoto` int(11) NOT NULL AUTO_INCREMENT,
+  `nomfoto` varchar(100) COLLATE utf8_bin NOT NULL,
+  `direccion` varchar(100) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`idfoto`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `foto`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fototag`
+--
+
+CREATE TABLE IF NOT EXISTS `fototag` (
+  `taglike` int(255) NOT NULL,
+  `tagdislike` int(255) NOT NULL,
+  `coordenadas` int(100) NOT NULL,
+  `comentarios` varchar(100) COLLATE utf8_bin NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `idfoto` int(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcar la base de datos para la tabla `fototag`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `tagfoto`
+--
+CREATE TABLE IF NOT EXISTS `tagfoto` (
+`idfoto` int(11)
+,`nomfoto` varchar(100)
+,`direccion` varchar(100)
+,`taglike` int(255)
+);
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `iduser` int(10) NOT NULL AUTO_INCREMENT,
+  `user` varchar(25) COLLATE utf8_bin NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `email` varchar(25) COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`iduser`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+
+--
+-- Volcar la base de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`iduser`, `user`, `name`, `email`, `password`) VALUES
+(1, 'juan', 'juan garcias', 'mar', '1234'),
+(2, 'o', 'o', 'o', 'o'),
+(3, '', '', '', ''),
+(4, 'hola', 'hola', 'hola', 'hola'),
+(5, 'bob', 'bobo', 'bob', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `tagfoto`
+--
+DROP TABLE IF EXISTS `tagfoto`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tagfoto` AS select `foto`.`idfoto` AS `idfoto`,`foto`.`nomfoto` AS `nomfoto`,`foto`.`direccion` AS `direccion`,`fototag`.`taglike` AS `taglike` from (`foto` join `fototag`) where (`foto`.`idfoto` = `fototag`.`idfoto`);
+--------
+para buscar la data de cuantas veces se ha tageado la imagen
+create view TagFoto as
+SELECT foto.idfoto, nomfoto, direccion, taglike  FROM foto, fototag where foto.idfoto  = fototag.idfoto
+
+
+--------
+CREATE TABLE  `spaceapp`.`clasificacion` (
+`id` INT NOT NULL AUTO_INCREMENT ,
+`idimage` INT NOT NULL ,
+`iduser` INT NOT NULL ,
+`estado` BOOL NOT NULL ,
+PRIMARY KEY (  `idimage` ,  `iduser` ,  `id` )
+) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_bin;
